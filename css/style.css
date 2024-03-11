@@ -1,0 +1,215 @@
+    *{
+    margin:0px;
+    box-sizing: border-box;
+    }
+    body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: greenyellow;
+    color: black;
+    }
+    /*ŠTÝLY PRE FONTY*/
+    h1{
+    font-size:60px;
+    }
+    h2{
+    font-size:40px;
+    }
+    h3{
+    font-size:35px;
+    }
+    h4,h5,h6{
+    font-size:25px;
+    }
+    p{
+    font-size:20px;
+    }
+    h1,h2,h3,h4,h5,h6,p,a,li{
+    margin-bottom: 0.7em;
+    }
+    main{
+        margin-top:60px;
+        }
+    main section:nth-child(even){
+        background-color: black;
+    }
+    /*ŠTÝLY PRE HEADER*/
+    header{
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    z-index: 1;
+    max-width: 100%;
+    }
+    .main-menu li{
+    display:inline;
+    margin-left: 20px;
+    }
+    .main-menu li a{
+    text-decoration: none;
+    color:greenyellow;
+    }
+    .main-menu li:hover a{
+    text-decoration: underline;
+    }
+    .hamburger{
+    display: none;
+    }
+    .container{
+    padding:3% 10% 3% 10%;
+    }
+    .row{
+    display:flex;
+    flex-direction: row;
+    padding: 25px 0px;
+    gap:20px;
+    }
+    /*šírka stĺpcov .col, ktoré sa nachádzajú pod class .row*/
+    .row .col-25{
+    width:25%;
+    }
+    .row .col-33{
+    width:33%;
+    }
+    .row .col-50{
+    width:50%;
+    }
+    .row .col-100{
+    width:100%;
+    }
+    /*FARBY POZADIA*/
+    .bg-black{
+    background-color:black;
+    }
+    /*FARBY TEXTOV*/
+    .text-greenyellow{
+    color:greenyellow;
+    }
+    /*ZAROVNANIE TEXTOV*/
+    .text-center{
+    text-align:center;
+    }
+    .text-left{
+    text-align:left;
+    }
+    .text-right{
+    text-align:right;
+    }
+    input {
+        padding:10px;
+        border:0;
+        box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+        border-radius:10px;
+        margin:10px 0;
+        width:40%;
+        height:50px;
+        }
+    textarea{
+        padding:10px;
+        border:0;
+        box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+        border-radius:10px;
+        margin:10px 0;
+        width:40%;
+        height:180px;
+        }
+    input[type=checkbox]{
+        padding:10px;
+        box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+        margin:10px 0;
+        width: 30px; 
+        height: 30px; 
+        font-size: 26px;
+        }
+
+    input[type=submit] {
+        background-color: black; 
+        color: greenyellow;
+        border: none;
+        padding: 15px 32px;
+        width: 370px; 
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        transition-duration: 0.50s;
+        }
+    input[type=submit]:hover {
+        background-color: white; 
+        color: black;
+        cursor: pointer;
+        }
+
+    @media screen and (max-width: 600px) {
+        #logo{
+            height: 60px;
+        }
+        #logo_1{
+            height: 200px;
+        }
+        #logo_2{
+            height: 400px;
+            width: 100%;
+        }
+        main{
+        margin-top:0px;
+        }
+        h1{
+        font-size:40px;
+        }
+        h2{
+        font-size:30px;
+        }
+        .row{
+        flex-direction: column;
+        }
+        .row .col-25, .row .col-33, .row .col-50{
+        width: 100% !important;
+        }
+        .main-menu{
+        display: none;
+        }
+        .hamburger {
+        display: inline;
+        }
+        .main-header{
+        position:relative;
+        top:0px;
+        }
+        .main-menu.responsive {
+        display: block;
+        position: absolute;
+        background-color: black;
+        width:100%;
+        top:60px;
+        left:0px;
+        padding-top:20px;
+        padding-bottom:20px;
+        }
+        .main-menu.responsive li{
+        display: block;
+        margin-left:0px;
+        }
+        input {
+            width:90%;
+            height:50px;
+          }
+        textarea{
+            width:90%;
+            height:180px;
+        }
+        input[type=checkbox]{
+            width: 20px; 
+            height: 20px; 
+            font-size: 5px;
+        }
+
+        input[type=submit] {
+            width: 200px; 
+          }
+        }

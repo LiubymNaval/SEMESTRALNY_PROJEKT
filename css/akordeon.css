@@ -1,0 +1,72 @@
+/*skryt odpovede*/
+.accordion .answer{
+    display:none;
+  }
+  
+  /*štýly pre zobrazené otázky*/
+  .accordion.active .answer{
+      display:block;
+      background-color:black;
+      color:greenyellow;
+      padding:2%;
+  }
+  /*štýl pre otázky*/
+  .question{
+    background-color:black;
+    color:greenyellow;
+    padding:2%;
+  }
+  /*pred každú otázku pomocou before pridať obsah*/
+  .question::before {
+  content: '+ ';
+  }
+  /*accordion bude aktívny keď prejdem myšou nad otázku*/
+  .question:hover, 
+  .accordion.active .question{
+    background-color:greenyellow;
+    color:black;
+    cursor:pointer;
+  }
+  /*Keď je rozbalená otázka, -*/
+  .accordion.active .question::before {
+  content: '- ';
+  }
+  /*skryt odpovede*/
+  .accordion .answer{
+    display:none;
+  }
+  /*štýly pre zobrazené otázky*/
+  .accordion.active .answer{
+      display:block;
+      background-color:black;
+      color:greenyellow;
+      padding:2%;
+  }
+  /*štýl pre otázky*/
+  .question{
+    background-color:black;
+    color:greenyellow;
+    padding:2%;
+  }
+  /*pred každú otázku pomocou before pridať obsah*/
+  .question::before {
+  content: '+ ';
+  }
+  /*accordion bude aktívny keď prejdem myšou nad otázku */
+  .question:hover, 
+  .accordion.active .question{
+    background-color:greenyellow;
+    color:black;
+    cursor:pointer;
+  }
+  /*Keď je rozbalená otázka, -*/
+  .accordion.active .question::before {
+  content: '- ';
+  }
+  /*štýl na mobiloch*/
+  @media screen and (max-width: 600px) {
+  .accordion.active .answer{padding:5%;}
+  .question{padding:5%;}
+  .accordion.active .answer{padding:5%;}
+  .question{padding:5%;}
+  }
