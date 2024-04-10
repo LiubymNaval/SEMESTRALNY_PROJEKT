@@ -10,16 +10,16 @@
 <body>
 <header class="container main-header">
 <div>
-<a href="index.html">
+<a href="index.php">
 <img src="img/FC_Lomberx.png" height="100px" id = "logo">
 </a>
 </div>
 <nav class="main-nav">
 <ul class="main-menu" id="main-menu">
-<li><a href="index.html">Domov</a></li>
-<li><a href="o_nas.html">O nás</a></li>
-<li><a href="galeria.html">Galéria</a></li>
-<li><a href="kontakt.html">Kontakt</a></li>
+<li><a href="index.php">Domov</a></li>
+<li><a href="o_nas.php">O nás</a></li>
+<li><a href="galeria.php">Galéria</a></li>
+<li><a href="kontakt.php">Kontakt</a></li>
 </ul>
 <a class="hamburger" id="hamburger">
   <i class="fa fa-bars" style="color:greenyellow"></i>
@@ -68,10 +68,10 @@
     <div class="col-25">
     <h4>Rýchle odkazy</h4>
     <ul>
-        <li><a href="index.html" style="color: greenyellow">Domov</a></li>
-        <li><a href="o_nas.html" style="color: greenyellow">O nás</a></li>
-        <li><a href="galeria.html" style="color: greenyellow">Galéria</a></li>
-        <li><a href="kontakt.html" style="color: greenyellow">Kontakt</a></li>
+        <li><a href="index.php" style="color: greenyellow">Domov</a></li>
+        <li><a href="o_nas.php" style="color: greenyellow">O nás</a></li>
+        <li><a href="galeria.php" style="color: greenyellow">Galéria</a></li>
+        <li><a href="kontakt.php" style="color: greenyellow">Kontakt</a></li>
     </ul>
     </div>
     <div class="col-25">
