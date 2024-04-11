@@ -20,6 +20,7 @@
 <li><a href="o_nas.php">O nás</a></li>
 <li><a href="galeria.php">Galéria</a></li>
 <li><a href="kontakt.php">Kontakt</a></li>
+<li><a href="recenzie.php">Recenzie</a></li>
 </ul>
 <a class="hamburger" id="hamburger">
   <i class="fa fa-bars" style="color:greenyellow"></i>
@@ -72,6 +73,7 @@
         <li><a href="o_nas.php" style="color: greenyellow">O nás</a></li>
         <li><a href="galeria.php" style="color: greenyellow">Galéria</a></li>
         <li><a href="kontakt.php" style="color: greenyellow">Kontakt</a></li>
+        <li><a href="recenzie.php" style="color: greenyellow">Recenzie</a></li>
     </ul>
     </div>
     <div class="col-25">
