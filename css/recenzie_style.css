@@ -1,0 +1,57 @@
+.reviews-container {
+    max-width: 600px;
+    margin: 10px auto;
+  }
+  
+  .review {
+    border: 5px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: black;
+    color: greenyellow;
+  }
+  
+  .user-info {
+    margin-bottom: 10px;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+  
+  .rating {
+    font-style: italic;
+  }
+  
+  .comment {
+    margin-bottom: 10px;
+  }
+  
+  .edit-btn {
+    background-color: greenyellow;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .edit-btn:hover {
+    background-color: greenyellow;
+  }
+  
+  .star-rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+  }
+  
+  .star {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .star:hover,
+  .star:hover ~ .star {
+    color: gold;
+  }
