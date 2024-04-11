@@ -10,25 +10,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<header class="container main-header">
-<div>
-<a href="index.php">
-<img src="img/FC_Lomberx.png" height="100px" id = "logo">
-</a>
-</div>
-<nav class="main-nav">
-<ul class="main-menu" id="main-menu">
-<li><a href="index.php">Domov</a></li>
-<li><a href="o_nas.php">O nás</a></li>
-<li><a href="galeria.php">Galéria</a></li>
-<li><a href="kontakt.php">Kontakt</a></li>
-<li><a href="recenzie.php">Recenzie</a></li>
-</ul>
-<a class="hamburger" id="hamburger">
-<i class="fa fa-bars" style="color:greenyellow"></i>
-</a>
-</nav>
-</header>
+<?php
+$file_path = "parts/header.php";
+if(!require($file_path)){
+    echo "Failed to include $file_path";
+}
+?>
 <main class="container">
   <section>
   <div class="col-100 text-center" style="background-color: greenyellow">
@@ -71,6 +58,12 @@
 </div>
 </section>
 </main>
+<?php
+    $file_path = "parts/footer.php";
+        if(!require($file_path)){
+      echo "Failed to include $file_path";
+    }
+    ?>
   <script src="js/recenzie.js"></script>
 </body>
 </html>
