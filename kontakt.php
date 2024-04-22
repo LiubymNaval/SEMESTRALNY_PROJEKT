@@ -24,10 +24,10 @@ if(!require($file_path)){
       </div>
       <div class="col-100 text-center" style="background-color: greenyellow">
         <h3>Napíšte nám</h3>
-        <form id="contact" action="">
-          <input type="text" placeholder="Vaše meno" id ="meno" ><br>
-          <input type="email" placeholder="Váš email" id="email"><br>
-          <textarea name="" placeholder="Vaša správa" id="sprava"></textarea><br>
+        <form id="contact" method="POST" action="db/spracovanieFormulara.php">
+          <input type="text" name="meno" placeholder="Vaše meno" id ="meno"><br>
+          <input type="email" name="email" placeholder="Váš email" id="email"><br>
+          <textarea name="sprava" placeholder="Vaša správa" id="sprava"></textarea><br>
           <input type="checkbox" name="" id=""  ><label for=""> Súhlasím so spracovaním osobných údajov.</label><br>
           <input type="submit" value="Odoslať" id = "odoslat">
         </form>
