@@ -12,6 +12,7 @@ $menu = getMenuData("header");
 <nav class="main-nav">
 <ul class="main-menu" id="main-menu">
 <?php printMenu($menu); ?>
+<?php printLoginRegister()?>
 </ul>
 <a class="hamburger" id="hamburger">
 <i class="fa fa-bars" style="color:greenyellow"></i>

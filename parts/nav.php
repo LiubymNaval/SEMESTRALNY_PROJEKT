@@ -49,4 +49,13 @@ function printMenu(array $menu)
         echo '<li><a href="' . $menuData['path'] . '">' . $menuData['name'] . '</a></li>';
     }
 }
+
+function printLoginRegister(): void{
+    session_start();
+    if (isset($_SESSION['login'])) {
+        echo '<li> <a href= db/logout.php >Prihlásený:' . $_SESSION['login'] . ' (' . $_SESSION['rola'] . ')'.'</a> </li> ';
+    } else {
+        echo '<li> <a href="profil.php">Prihlásiť/Registrovať</a> </li>';
+    }
+}
 ?>
