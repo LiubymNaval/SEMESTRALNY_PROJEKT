@@ -25,44 +25,16 @@ if(!require($file_path)){
       </div>
     </section>
     <section>
-    <div class="accordion">
-      <div class="question">Čo je LOMBERX FC?</div>
-      <div class="answer">LOMBERX FC - je mládežnícky futbalový klub, 
-        ktorý poskytuje vysoko kvalitnú futbalovú prípravu
-        a vytvára komfortné podmienky pre rozvoj osobnosti každého účastníka.</div>
-    </div>
-    <div class="accordion">
-      <div class="question">Aký trénerský tím je v klube?</div>
-      <div class="answer">Trénerský tím LOMBERX FC pozostáva z kvalitných odborníkov vo futbalovom priemysle
-         s mnohoročným skúsenostiam práce s mládežníckymi tímami.</div>
-    </div>
-    <div class="accordion">
-      <div class="question">Čo zahŕňa tréningový program v klube?</div>
-      <div class="answer">Program zahŕňa futbalové lekcie, intenzívne tréningy na zlepšenie rýchlosti,
-         vytrvalosti, sily, tréningy taktiky a rozhodovania sa na ihrisku.</div>
-    </div>
-    <div class="accordion">
-      <div class="question">V akých súťažiach sa zúčastňuje LOMBERX FC?</div>
-      <div class="answer">Klub aktívne súťaží v rôznych turnajoch a šampionátoch na miestnej, regionálnej a národnej úrovni.</div>
-    </div>
-    <div class="accordion">
-      <div class="question">Aký je zameranie klubu okrem športových tréningov?</div>
-      <div class="answer">Okrem športových tréningov sa klub venuje aj rozvoju osobnosti teenagerov, pomáha formovať vodcovské schopnosti a zodpovednosť.</div>
-    </div>
-    <div class="accordion">
-      <div class="question">Ako LOMBERX FC pomáha svojim účastníkom po skončení výučby?</div>
-      <div class="answer"> LOMBERX FC nie len ukončuje vzdelávanie, ale aj pokračuje v podpore svojich účastníkov v ich ďalších krokoch. 
-        Poskytujeme možnosti pre ďalšie profesionálne rozvoj, smerujúc absolventov k profesionálnym futbalovým klubom alebo futbalovým akadémiám. 
-        Veríme, že naši účastníci vďaka znalostiam a zručnostiam získaným v klube LOMBERX FC môžu úspešne dosahovať svoje ciele vo svojom profesionálnom športe.</div>
-    </div>
-    <div class="accordion">
-      <div class="question">Ako sa pripojiť k tímu LOMBERX FC?</div>
-      <div class="answer">Aby ste sa pripojili k tímu LOMBERX FC, môžete vyplniť špeciálny formulár na našej webovej stránke v sekcii "Kontakty" 
-        a odoslať nám svoj email. My sa s vami spojíme a odpovieme vám na váš email. Tiež nás môžete kontaktovať prostredníctvom e-mailu alebo telefonicky na číslo,
-         ktoré nájdete na spodnej časti našej webovej stránky.</div>
-    </div>
-  </section>
-  </div>
+    <?php
+           include_once "classes/QnA.php";
+           use otazkyodpovede\QnA;
+
+          $qna = new QnA();
+          $qna->insertQnA();
+          $qna->getQnA();
+          
+          ?>
+    </section>
   </main>
   <?php
     $file_path = "parts/footer.php";

@@ -23,6 +23,7 @@
             <li><a href="galeria.php" style="color: greenyellow">Galéria</a></li>
             <li><a href="kontakt.php" style="color: greenyellow">Kontakt</a></li>
             <li><a href="recenzie.php" style="color: greenyellow">Recenzie</a></li>
+            <li><a href="profil.php" style="color: greenyellow">Prihlásiť/Registrovať</a></li>
         </ul>
         </div>
         <div class="col-25">
