@@ -56,8 +56,8 @@ class QnA extends Database {
                     <div class="question">' .
                     $row["otazka"] . '
                     <div class="buttons">
-                        <a href="db/edit_qna.php?id=' . $row["ID"] . '">Editovať</a>
-                        <a href="db/delete_qna.php?id=' . $row["ID"] . '">Vymazať</a>
+                        <a href="db/edit_qna.php?id=' . $row["ID"] . '" >Editovať</a>
+                        <a href="db/delete_qna.php?id=' . $row["ID"] . '" >Vymazať</a>
                     </div>
                      </div>
                     <div class="answer">' .
