@@ -34,16 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LOMBERX FC</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/akordeon.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/akordeon.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<main>
-    <section class="container">
+<main class="container">
+    <section>
+      <div class="container">
         <div class="col-100 text-center">
-            <h1>Editácia otázky a odpovede</h1>
+          <h1>Editácia otázky a odpovede</h1>
         </div>
+      </div>
     </section>
     <form action="edit_qna.php?id=<?php echo $id; ?>" method="post">
         <input type="hidden" name="id" value="<?php echo $row['ID']; ?>">
@@ -55,7 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea name="answer" id="answer"><?php echo $row['odpoved']; ?></textarea>
         </div>
         <input type="submit" value="Uložiť">
-        <button type="button" onClick="location.href='o_nas.php'">Zrušiť</button>
+        <input type="button" value="Zrušiť" onClick="location.href='../o_nas.php'" style="background-color: white; color: black; padding: 15px 32px;
+            width: 370px; font-size: 16px; cursor: pointer">
     </form>
 </main>
 </body>

@@ -32,27 +32,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LOMBERX FC</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/akordeon.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/akordeon.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<main>
-    <section class="container">
+<main class="container">
+      <div class="container">
         <div class="col-100 text-center">
-            <h1>Vymazanie otázky a odpovede</h1>
+          <h1>Vymazanie otázky a odpovede</h1>
         </div>
-    </section>
-    <div class="row">
+      </div>
+    <div class="container">
         <p>Ste si istí, že chcete vymazať túto otázku a odpoveď?</p>
         <p><?php echo $row['otazka']; ?></p>
         <p><?php echo $row['odpoved']; ?></p>
         <form action="delete_qna.php?id=<?php echo $id; ?>" method="post">
-            <input type="hidden" name="id" value="<?php echo $row['id']; ?>"
-            <div class="row">
+            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
             <input type="submit" value="Vymazať">
-            <button type="button" onClick="location.href='o_nas.php'">Zrušiť</button>
-            </div>
+            <input type="button" value="Zrušiť" onClick="location.href='../o_nas.php'" style="background-color: white; color: black; padding: 15px 32px;
+            width: 370px; font-size: 16px; cursor: pointer">
         </form>
     </div>
 </main>
