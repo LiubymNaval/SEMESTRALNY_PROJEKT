@@ -21,6 +21,7 @@ if(!require($file_path)){
   <div class="col-100 text-center" style="background-color: greenyellow">
 
 <!-- Formulár na pridanie komentára -->
+  <form id="comments" method="POST" action="db/add_recenzie.php">
   <div class="add-review">
   <h2>Pridať recenziu</h2>
   <form id="review-form">
@@ -43,6 +44,7 @@ if(!require($file_path)){
     <input type="submit" value="Odoslať" id = "odoslat">
   </form>
   </div>
+  </form>
 
   <div class="reviews-container">
     <div class="review">
@@ -54,7 +56,13 @@ if(!require($file_path)){
       <button class="edit-btn">Upraviť</button>
     </div>
   </div>
+  <?php
+         include_once "classes/Recenzie.php";
+         use recenzie\Recenzie;
 
+         $rec = new Recenzie();
+         $rec->getRecenzie();
+          ?>
 </div>
 </section>
 </main>
