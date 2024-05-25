@@ -1,14 +1,16 @@
 <?php
+session_start();
 error_reporting(E_ALL);
 ini_set("display_errors","On");
 define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/classes/Recenzie.php');
 use recenzie\Recenzie;
-$meno = $_POST['username'];
+$meno = $_SESSION['login'];
 $komentar = $_POST['comment'];
-$hodnotenie = 5;
-$id_user = 2;
-if(!empty($meno) && !empty($komentar)){
+$hodnotenie = $_POST['rating'];
+$id_user =  $_SESSION['user_id'];
+
+if(!empty($meno) && !empty($komentar) && !empty($hodnotenie) && !empty($id_user)){
     $recenzie = new Recenzie();
     $result = $recenzie->ulozitKomentar($id_user, $meno, $hodnotenie, $komentar);
 

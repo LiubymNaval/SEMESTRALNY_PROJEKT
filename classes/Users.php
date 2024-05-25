@@ -73,7 +73,21 @@ class Users extends Database{
                 echo "admin je tu";
                 return true;
             }else{
-                echo "session sa spustil, ale nie je admin";
+                echo "";
+            }
+        }else{
+            echo "";
+            return false;
+        }
+    }
+    public function isNotAdmin(){
+        session_start();
+        if (isset($_SESSION['rola']) && $_SESSION['user_id']) {
+            if($_SESSION['rola'] == 'pouzivatel'){
+                echo "";
+                return true;
+            }else{
+                echo "";
             }
         }else{
             echo "";

@@ -16,12 +16,8 @@ class Recenzie extends Database {
         //Použitie gettera na získanie spojenia
         $this->connection = $this->getConnection();
     }
-    public function getQnAById($id) {
-        if (!is_numeric($id)) {
-            echo 'ID otázky musí byť číslo.';
-            exit;
-        }
-        $sql = "SELECT * FROM qna WHERE ID = :id";
+    public function getRecenzieById($id) {
+        $sql = "SELECT * FROM comments WHERE ID = :id";
         $statement = $this->connection->prepare($sql);
         $statement->bindParam(':id', $id);
         $statement->execute();
@@ -29,16 +25,12 @@ class Recenzie extends Database {
         $row = $statement->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
-    public function updateQnA($id, $question, $answer) {
-        if (!is_numeric($id)) {
-            echo 'ID otázky musí byť číslo.';
-            exit;
-        }
-        $sql = "UPDATE qna SET otazka = :question, odpoved = :answer WHERE ID = :id";
+    public function updateRecenzie($id, $hod, $Komentar) {
+        $sql = "UPDATE comments SET hodnotenie = :hod, komentar = :Komentar WHERE ID = :id";
         $statement = $this->connection->prepare($sql);
         $statement->bindParam(':id', $id);
-        $statement->bindParam(':question', $question);
-        $statement->bindParam(':answer', $answer);
+        $statement->bindParam(':hod', $hod);
+        $statement->bindParam(':Komentar', $Komentar);
         $statement->execute();
     }
         
@@ -48,40 +40,48 @@ class Recenzie extends Database {
         $statement->execute();
         // Získanie dát
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-        $admin = new Users();
-        if ($admin->isAdmin()) {
-            // Zobrazenie tlačidiel na editáciu a vymazanie
-            foreach ($data as $row) {
-                echo '<div class="reviews-container">
-                    <div class="review">
-                      <div class="user-info">
-                        <span class="username">' .$row["meno"] . '</span>
-                        <span class="rating"><span class="rating-stars" data-rating="' . $row["hodnotenie"] . '"></span></span>
-                      </div>
-                      <p class="comment">' .$row["komentar"] . '</p>
-                      <div class="buttons">
-                      <a href="db/edit_qna.php?id=' . $row["ID"] . '" style="color: black; background-color: greenyellow; padding: 5px;">Editovať</a>
-                      <a href="db/delete_qna.php?id=' . $row["ID"] . '" style="color: black; background-color: greenyellow;padding: 5px;">Vymazať</a>
-                     </div>
-                    </div>
-                  </div>';
-                  echo '<script>
-                  function createStars(element, rating) {
-                      let stars = "";
-                      for (let i = 0; i < rating; i++) {
-                          stars += "&#9733;"; 
-                      }
-                      element.innerHTML = stars;
-                  }
-  
-                  document.querySelectorAll(".rating-stars").forEach(function(starsContainer) {
-                      const rating = starsContainer.getAttribute("data-rating");
-                      createStars(starsContainer, rating);
-                  });
-                  </script>';  
-            }
-        } else {
-            // Zobrazenie otázok a odpovedí
+        $user = new Users();
+        if ($user->isAdmin()) {
+            echo '
+            <h1>Recenzie</h1>
+            <div class="col-100 text-center"> 
+            <h2>Tu nájdete recenzie o našom klube</h2>   
+            </div>';
+            echo '<!-- Formulár na pridanie komentára -->
+            <form id="comments" method="POST" action="db/add_recenzie.php">
+            <div class="add-review">
+            <h2>Pridať recenziu</h2>
+            <form id="review-form">
+              <div>
+                <textarea id="comment" placeholder="Váš komentár" name="comment" rows="4" required></textarea>
+              </div>
+              <div>
+                <label for="rating"></label>
+                <div class="star-rating" id="rating" >
+                  <span class="star" data-value="5">&#9733;</span>
+                  <span class="star" data-value="4">&#9733;</span>
+                  <span class="star" data-value="3">&#9733;</span>
+                  <span class="star" data-value="2">&#9733;</span>
+                  <span class="star" data-value="1">&#9733;</span>
+                </div>
+                <input type="hidden" name="rating" id="ratingValue">
+              </div>
+              <input type="submit" value="Odoslať" id = "odoslat">
+            </form>
+            </div>
+            </form>';
+            echo '<script>
+                const stars = document.querySelectorAll(".star");
+                const ratingValueInput = document.getElementById("ratingValue");
+    
+                stars.forEach(star => {
+                star.addEventListener("click", function() {
+                    stars.forEach(s => s.classList.remove("selected"));
+                    this.classList.add("selected");
+                    ratingValueInput.value = this.getAttribute("data-value");
+                    });
+                });
+             </script>';  
             if ($data) {
                 foreach ($data as $row) {
                     echo '<div class="reviews-container">
@@ -92,8 +92,7 @@ class Recenzie extends Database {
                       </div>
                       <p class="comment">' .$row["komentar"] . '</p>
                       <div class="buttons">
-                        <a href="db/edit_qna.php?id=' . $row["ID"] . '" style="color: black; background-color: greenyellow; padding: 5px;">Editovať</a>
-                        <a href="db/delete_qna.php?id=' . $row["ID"] . '" style="color: black; background-color: greenyellow;padding: 5px;">Vymazať</a>
+                        <a href="db/delete_recenzie.php?id=' . $row["ID"] . '" style="color: black; background-color: greenyellow;padding: 5px;">Vymazať</a>
                     </div>
                     </div>
                   </div>';
@@ -113,18 +112,162 @@ class Recenzie extends Database {
                   </script>';  
                 }
             } else {
-                echo "Neboli nájdené žiadne komentare.";
+                echo "Neboli nájdené žiadne recenzie";
+            } 
+        } 
+        
+        else if($user->isNotAdmin()){
+            echo '
+            <h1>Recenzie</h1>
+            <div class="col-100 text-center"> 
+            <h2>Tu nájdete recenzie o našom klube</h2>   
+            </div>';
+            echo '<!-- Formulár na pridanie komentára -->
+            <form id="comments" method="POST" action="db/add_recenzie.php">
+            <div class="add-review">
+            <h2>Pridať recenziu</h2>
+            <form id="review-form">
+              <div>
+                <textarea id="comment" placeholder="Váš komentár" name="comment" rows="4" required></textarea>
+              </div>
+              <div>
+                <label for="rating"></label>
+                <div class="star-rating" id="rating" >
+                  <span class="star" data-value="5">&#9733;</span>
+                  <span class="star" data-value="4">&#9733;</span>
+                  <span class="star" data-value="3">&#9733;</span>
+                  <span class="star" data-value="2">&#9733;</span>
+                  <span class="star" data-value="1">&#9733;</span>
+                </div>
+                <input type="hidden" name="rating" id="ratingValue">
+              </div>
+              <input type="submit" value="Odoslať" id = "odoslat">
+            </form>
+            </div>
+            </form>';
+            echo '<script>
+                const stars = document.querySelectorAll(".star");
+                const ratingValueInput = document.getElementById("ratingValue");
+    
+                stars.forEach(star => {
+                star.addEventListener("click", function() {
+                    stars.forEach(s => s.classList.remove("selected"));
+                    this.classList.add("selected");
+                    ratingValueInput.value = this.getAttribute("data-value");
+                    });
+                });
+             </script>'; 
+            if ($data) {
+                foreach ($data as $row) {
+                    if ($row['id_user'] == $_SESSION['user_id']) {
+                        echo '<div class="reviews-container">
+                        <div class="review">
+                          <div class="user-info">
+                            <span class="username">' .$row["meno"] . '</span>
+                            <span class="rating"><span class="rating-stars" data-rating="' . $row["hodnotenie"] . '"></span></span>
+                          </div>
+                          <p class="comment">' .$row["komentar"] . '</p>
+                          <div class="buttons">
+                            <a href="db/edit_recenzie.php?id=' . $row["ID"] . '" style="color: black; background-color: greenyellow; padding: 5px;">Editovať</a>
+                            <a href="db/delete_recenzie.php?id=' . $row["ID"] . '" style="color: black; background-color: greenyellow;padding: 5px;">Vymazať</a>
+                        </div>
+                        </div>
+                      </div>';
+                      echo '<script>
+                      function createStars(element, rating) {
+                          let stars = "";
+                          for (let i = 0; i < rating; i++) {
+                              stars += "&#9733;"; 
+                          }
+                          element.innerHTML = stars;
+                      }
+      
+                      document.querySelectorAll(".rating-stars").forEach(function(starsContainer) {
+                          const rating = starsContainer.getAttribute("data-rating");
+                          createStars(starsContainer, rating);
+                      });
+                      </script>';                 
+
+                    }else{
+
+                    }
+                }
+                foreach ($data as $row) {
+                    if ($row['id_user'] != $_SESSION['user_id']) {
+                        echo '<div class="reviews-container">
+                        <div class="review">
+                          <div class="user-info">
+                            <span class="username">' .$row["meno"] . '</span>
+                            <span class="rating"><span class="rating-stars" data-rating="' . $row["hodnotenie"] . '"></span></span>
+                          </div>
+                          <p class="comment">' .$row["komentar"] . '</p>
+                        </div>
+                      </div>';
+                      echo '<script>
+                      function createStars(element, rating) {
+                          let stars = "";
+                          for (let i = 0; i < rating; i++) {
+                              stars += "&#9733;"; 
+                          }
+                          element.innerHTML = stars;
+                      }
+      
+                      document.querySelectorAll(".rating-stars").forEach(function(starsContainer) {
+                          const rating = starsContainer.getAttribute("data-rating");
+                          createStars(starsContainer, rating);
+                      });
+                      </script>';                 
+
+                    }else{
+
+                    }
+                }
+            } else {
+                echo "Neboli nájdené žiadne recenzie";
+            }
+
+        } else {
+            echo '
+            <h1>Recenzie</h1>
+            <div class="col-100 text-center"> 
+            <h2>Tu nájdete recenzie o našom klube</h2>   
+            <h4>Ak chcete pridať svoju recenziu, musíte sa zaregistrovať na našej stránke.</h4> 
+            </div>';
+            if ($data) {
+                foreach ($data as $row) {
+                    echo '<div class="reviews-container">
+                    <div class="review">
+                      <div class="user-info">
+                        <span class="username">' .$row["meno"] . '</span>
+                        <span class="rating"><span class="rating-stars" data-rating="' . $row["hodnotenie"] . '"></span></span>
+                      </div>
+                      <p class="comment">' .$row["komentar"] . '</p>
+                    </div>
+                  </div>';
+                  echo '<script>
+                  function createStars(element, rating) {
+                      let stars = "";
+                      for (let i = 0; i < rating; i++) {
+                          stars += "&#9733;"; 
+                      }
+                      element.innerHTML = stars;
+                  }
+  
+                  document.querySelectorAll(".rating-stars").forEach(function(starsContainer) {
+                      const rating = starsContainer.getAttribute("data-rating");
+                      createStars(starsContainer, rating);
+                  });
+                  </script>';  
+                }
+            } else {
+                echo "Neboli nájdené žiadne recenzie";
             }
         }
         // Uzatvorenie spojenia
             $this->connection = null;
     }
-    public function deleteQnA($id) {
-        if (!is_numeric($id)) {
-            echo 'ID otázky musí byť číslo.';
-            exit;
-        }
-        $sql = "DELETE FROM qna WHERE ID = :id";
+    public function deleteRecenzie($id) {
+        $sql = "DELETE FROM comments WHERE ID = :id";
         $statement = $this->connection->prepare($sql);
         $statement->bindParam(':id', $id);
         $statement->execute();
