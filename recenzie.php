@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOMBERX FC</title>
+<title>Recenzie</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/slider.css">
 <link rel="stylesheet" href="css/recenzie_style.css">
@@ -36,5 +36,6 @@ if(!require($file_path)){
     }
     ?>
   <script src="js/recenzie.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

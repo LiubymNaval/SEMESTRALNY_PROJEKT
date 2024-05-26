@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOMBERX FC</title>
+<title>Kontakt</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -25,9 +25,9 @@ if(!require($file_path)){
       <div class="col-100 text-center" style="background-color: greenyellow">
         <h3>Napíšte nám</h3>
         <form id="contact" method="POST" action="db/spracovanieFormulara.php">
-          <input type="text" name="meno" placeholder="Vaše meno" id ="meno"><br>
-          <input type="email" name="email" placeholder="Váš email" id="email"><br>
-          <textarea name="sprava" placeholder="Vaša správa" id="sprava"></textarea><br>
+          <input type="text" name="meno" placeholder="Vaše meno" id ="meno" required><br>
+          <input type="email" name="email" placeholder="Váš email" id="email" required><br>
+          <textarea name="sprava" placeholder="Vaša správa" id="sprava" required></textarea><br>
           <input type="checkbox" name="" id=""  ><label for=""> Súhlasím so spracovaním osobných údajov.</label><br>
           <input type="submit" value="Odoslať" id = "odoslat">
         </form>

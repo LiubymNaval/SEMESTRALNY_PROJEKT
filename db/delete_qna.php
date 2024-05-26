@@ -27,11 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOMBERX FC</title>
+<title>Vymazanie otázky a odpovede</title>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/akordeon.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
             <input type="submit" value="Vymazať">
             <input type="button" value="Zrušiť" onClick="location.href='../o_nas.php'" style="background-color: white; color: black; padding: 15px 32px;
-            width: 370px; font-size: 16px; cursor: pointer">
+            width: 250px; font-size: 16px; cursor: pointer">
         </form>
     </div>
 </main>

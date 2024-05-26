@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOMBERX FC</title>
+<title>Vymazanie recenzie</title>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/akordeon.css">
 <link rel="stylesheet" href="../css/recenzie_style.css">
@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <span class="username"><?php echo $row["meno"]?></span>
                         <span class="rating"><span class="rating-stars" data-rating="<?php echo $row["hodnotenie"]?>"></span></span>
                     </div>
+                      <p class="date"><?php echo$row["datum"]?></p>
                       <p class="comment"><?php echo $row["komentar"]?></p>
                 </div>
             </div>
