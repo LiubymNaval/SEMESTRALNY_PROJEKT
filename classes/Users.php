@@ -22,7 +22,11 @@ class Users extends Database{
             $statement->execute();
             $existingUser = $statement->fetch();
             if ($existingUser) {
-                throw new Exception("Požívateľ už existuje.");
+                echo '<script>';
+                echo 'alert("Požívateľ už existuje");';
+                echo 'window.history.back();';
+                echo '</script>';
+                exit();
             }
             $sql = "INSERT INTO pouzivatelia (login, email, heslo, rola) VALUES (?, ?, ?, ?)";
             $statement = $this->connection->prepare($sql);
@@ -45,13 +49,21 @@ class Users extends Database{
         $statement->execute();
         $user = $statement->fetch();
         if (!$user) {
-            throw new Exception("Požívateľ s daným menom neexistuje.");
+            echo '<script>';
+            echo 'alert("Požívateľ s daným e-mailom neexistuje");';
+            echo 'window.history.back();';
+            echo '</script>';
+            exit();
         }
         //Parameter heslo je názov stĺpca v db
         $storedPassword = $user['heslo'];
         // Overenie hesla
         if (!password_verify($password, $storedPassword)) {
-            throw new Exception("Nesprávne heslo.");
+            echo '<script>';
+            echo 'alert("Nesprávne heslo");';
+            echo 'window.history.back();';
+            echo '</script>';
+            exit();
         }
         // Spustenie session a uloženie informácií o používateľovi
         session_start();
@@ -63,9 +75,61 @@ class Users extends Database{
         session_start();
         session_unset(); // Vymazanie všetkých session premenných
         session_destroy();
-        header("Location: http://localhost/SEMESTRALNY_PROJEKT/index.php");
+        header("Location: http://localhost/SEMESTRALNY_PROJEKT/profil.php");
         exit();
     }
+    public function deleteUser($email, $password){
+        $sql = "SELECT * FROM pouzivatelia WHERE email = ?";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindParam(1, $email);
+        $statement->execute();
+        $user = $statement->fetch();
+        if (!$user) {
+            echo '<script>';
+            echo 'alert("Požívateľ s daným e-mailom neexistuje");';
+            echo 'window.history.back();';
+            echo '</script>';
+            exit();
+        }
+        $storedPassword = $user['heslo'];
+        // Overenie hesla
+        if (!password_verify($password, $storedPassword)) {
+            echo '<script>';
+            echo 'alert("Nesprávne heslo");';
+            echo 'window.history.back();';
+            echo '</script>';
+            exit();
+        }
+        $sql = "SELECT * FROM pouzivatelia WHERE email = ?";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindParam(1, $email);
+        $statement->execute();
+        $user = $statement->fetch();
+        if ($user) {
+        $delete_sql = "DELETE FROM pouzivatelia WHERE email = ?";
+        $statement_delete = $this->connection->prepare($delete_sql);
+        $statement_delete->bindParam(1, $email);
+        $statement_delete->execute();
+
+        if ($statement_delete->rowCount() > 0) {
+            echo "Používateľ bol úspešne odstránený";
+        } else {
+            echo '<script>';
+            echo 'alert("Používateľ nebol odstránený");';
+            echo 'window.history.back();';
+            echo '</script>';
+            exit();
+        }
+        } else {
+            echo '<script>';
+            echo 'alert("Používateľ nebol nájdený");';
+            echo 'window.history.back();';
+            echo '</script>';
+            exit();
+        }
+
+    }
+
     public function isAdmin(){
         session_start();
         if (isset($_SESSION['rola']) && $_SESSION['user_id']) {
@@ -73,10 +137,19 @@ class Users extends Database{
                 echo "admin je tu";
                 return true;
             }else{
-                echo "session sa spustil, ale nie je admin";
             }
         }else{
-            echo "nenašiel sa session";
+            return false;
+        }
+    }
+    public function isNotAdmin(){
+        session_start();
+        if (isset($_SESSION['rola']) && $_SESSION['user_id']) {
+            if($_SESSION['rola'] == 'pouzivatel'){
+                return true;
+            }else{
+            }
+        }else{
             return false;
         }
     }
