@@ -1,6 +1,5 @@
 <?php
 include_once "nav.php";
-
 $menu = getMenuData("header");
 ?>
 <header class="container main-header">

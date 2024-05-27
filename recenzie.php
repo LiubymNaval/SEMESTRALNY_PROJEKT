@@ -20,12 +20,11 @@ if(!require($file_path)){
   <section>
   <div class="col-100 text-center" style="background-color: greenyellow">
   <?php
-         include_once "classes/Recenzie.php";
-         use recenzie\Recenzie;
-
-         $rec = new Recenzie();
-         $rec->getRecenzie();
-          ?>
+    include_once "classes/Recenzie.php";
+    use recenzie\Recenzie;
+    $rec = new Recenzie();
+    $rec->getRecenzie();
+  ?>
 </div>
 </section>
 </main>

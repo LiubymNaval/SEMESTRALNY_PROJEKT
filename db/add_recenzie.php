@@ -10,20 +10,24 @@ $komentar = $_POST['comment'];
 $hodnotenie = $_POST['rating'];
 $id_user =  $_SESSION['user_id'];
 $datum = date('Y-m-d');
-
+//Kontrola prázdnych hodnôt
 if(!empty($meno) && !empty($komentar) && !empty($hodnotenie) && !empty($id_user)){
     $recenzie = new Recenzie();
     $result = $recenzie->ulozitKomentar($id_user, $meno, $hodnotenie, $komentar,$datum);
+    //Kontrola, ak recenzia už existuje, zakázať možnosť pridania novej
     if ($result === false) {
         echo '<script>';
-        echo 'alert("Používateľ už má existujúci komentár");';
+        echo 'alert("Už máte existujúcu recenziu");';
         echo 'window.history.back();';
         echo '</script>';
         exit;
     }
-
 }else {
-    header("Location: http://localhost/SEMESTRALNY_PROJEKT/recenzie.php");
+        echo '<script>';
+        echo 'alert("Pridajte prosím svoje hodnotenie:)");';
+        echo 'window.history.back();';
+        echo '</script>';
+        exit;
 }
 
 if ($result) {

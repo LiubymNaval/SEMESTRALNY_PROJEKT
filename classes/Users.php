@@ -1,6 +1,4 @@
 <?php
-//error_reporting(E_ALL); //zapnutie chybových hlásení
-//ini_set("display_errors","On");
 define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/classes/Database.php');
 class Users extends Database{
@@ -9,6 +7,7 @@ class Users extends Database{
     public function __construct() {
         $this->rola= "pouzivatel";
         $this->connect();
+        //Použitie gettera na získanie spojenia
         $this->connection = $this->getConnection();
     }
     public function register($login, $email, $password){
@@ -55,7 +54,6 @@ class Users extends Database{
             echo '</script>';
             exit();
         }
-        //Parameter heslo je názov stĺpca v db
         $storedPassword = $user['heslo'];
         // Overenie hesla
         if (!password_verify($password, $storedPassword)) {
@@ -84,6 +82,7 @@ class Users extends Database{
         $statement->bindParam(1, $email);
         $statement->execute();
         $user = $statement->fetch();
+        //či existuje používateľ s touto e-mailovou adresou
         if (!$user) {
             echo '<script>';
             echo 'alert("Požívateľ s daným e-mailom neexistuje");';
@@ -100,17 +99,19 @@ class Users extends Database{
             echo '</script>';
             exit();
         }
+        //Získanie všetkých polí používateľa s touto e-mailovou adresou 
         $sql = "SELECT * FROM pouzivatelia WHERE email = ?";
         $statement = $this->connection->prepare($sql);
         $statement->bindParam(1, $email);
         $statement->execute();
         $user = $statement->fetch();
+        //Vyhľadanie používateľa
         if ($user) {
         $delete_sql = "DELETE FROM pouzivatelia WHERE email = ?";
         $statement_delete = $this->connection->prepare($delete_sql);
         $statement_delete->bindParam(1, $email);
         $statement_delete->execute();
-
+        //Kontrola vymazania používateľa
         if ($statement_delete->rowCount() > 0) {
             echo "Používateľ bol úspešne odstránený";
         } else {

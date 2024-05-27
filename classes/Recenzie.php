@@ -38,16 +38,18 @@ class Recenzie extends Database {
         $sql = "SELECT * FROM comments";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
-        // Získanie dát
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         $user = new Users();
+        //Kontrola administrátora
         if ($user->isAdmin()) {
             echo '
             <h1>Recenzie</h1>
             <div class="col-100 text-center"> 
             <h2>Tu nájdete recenzie o našom klube</h2>   
             </div>';
+            //Kontrola recenzií
             if ($data) {
+              //Získavanie recenzií s možnosťou ich odstránenia administrátorom
               for ($i = count($data) - 1; $i >= 0; $i--) {
                 $row = $data[$i];
                     echo '<div class="reviews-container">
@@ -63,6 +65,7 @@ class Recenzie extends Database {
                     </div>
                     </div>
                   </div>';
+                  //Kód na pridanie hviezdičiek do recenzie
                   echo '<script>
                   function createStars(element, rating) {
                       let stars = "";
@@ -82,7 +85,7 @@ class Recenzie extends Database {
                 echo "Neboli nájdené žiadne recenzie";
             } 
         } 
-        
+        //Kontrola, či je používateľ zaregistrovaný
         else if($user->isNotAdmin()){
             echo '
             <h1>Recenzie</h1>
@@ -112,6 +115,7 @@ class Recenzie extends Database {
             </form>
             </div>
             </form>';
+            //Kód na pridanie hviezdičiek do recenzie
             echo '<script>
                 const stars = document.querySelectorAll(".star");
                 const ratingValueInput = document.getElementById("ratingValue");
@@ -125,8 +129,10 @@ class Recenzie extends Database {
                 });
              </script>'; 
             if ($data) {
+              //Získanie používateľskej recenzie
               for ($i = count($data) - 1; $i >= 0; $i--) {
-                $row = $data[$i];
+                    $row = $data[$i];
+                    //Ak sa recenzia s id používateľa zhoduje s aktuálnym id používateľa, zobrazí sa recenzia s možnosťou jej úpravy a vymazania.
                     if ($row['id_user'] == $_SESSION['user_id']) {
                         echo '<div class="reviews-container">
                         <div class="review">
@@ -142,6 +148,7 @@ class Recenzie extends Database {
                         </div>
                         </div>
                       </div>';
+                      //Kód na pridanie hviezdičiek do recenzie
                       echo '<script>
                       function createStars(element, rating) {
                           let stars = "";
@@ -161,6 +168,7 @@ class Recenzie extends Database {
 
                     }
                 }
+                //Získanie ostatných recenzií
                 for ($i = count($data) - 1; $i >= 0; $i--) {
                   $row = $data[$i];
                     if ($row['id_user'] != $_SESSION['user_id']) {
@@ -174,6 +182,7 @@ class Recenzie extends Database {
                         <p class="comment">' .$row["komentar"] . '</p>
                       </div>
                     </div>';
+                    //Kód na pridanie hviezdičiek do recenzie
                       echo '<script>
                       function createStars(element, rating) {
                           let stars = "";
@@ -204,6 +213,7 @@ class Recenzie extends Database {
             <h2>Tu nájdete recenzie o našom klube</h2>   
             <h4>Ak chcete pridať svoju recenziu, musíte sa zaregistrovať na našej stránke</h4> 
             </div>';
+            //Získanie recenzií
             if ($data) {
               for ($i = count($data) - 1; $i >= 0; $i--) {
                 $row = $data[$i];
@@ -217,6 +227,7 @@ class Recenzie extends Database {
                       <p class="comment">' .$row["komentar"] . '</p>
                     </div>
                   </div>';
+                  //Kód na pridanie hviezdičiek do recenzie
                   echo '<script>
                   function createStars(element, rating) {
                       let stars = "";
@@ -250,7 +261,7 @@ class Recenzie extends Database {
       $statement_check = $this->connection->prepare($sql_check);
       $statement_check->execute(array(':id_user' => $id_user));
       $existing_comment = $statement_check->fetch();
-  
+      //Kontrola, ak recenzia už existuje, zakázať možnosť pridania novej
       if ($existing_comment) {
           return false;
       }

@@ -22,7 +22,6 @@ if (!$row) {
     exit;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Spracovanie odoslaného formulára
     $qna->updateQnA($id, $_POST['question'], $_POST['answer']);
     header("Location: http://localhost/SEMESTRALNY_PROJEKT/o_nas.php");
     exit;
