@@ -26,14 +26,12 @@ if(!require($file_path)){
     </section>
     <section>
     <?php
-           include_once "classes/QnA.php";
-           use otazkyodpovede\QnA;
-
-          $qna = new QnA();
-          $qna->insertQnA();
-          $qna->getQnA();
-          
-          ?>
+    include_once "classes/QnA.php";
+    use otazkyodpovede\QnA;
+    $qna = new QnA();
+    $qna->insertQnA();
+    $qna->getQnA();     
+    ?>
     </section>
   </main>
   <?php

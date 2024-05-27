@@ -1,6 +1,6 @@
 <?php
 namespace otazkyodpovede;
-error_reporting(E_ALL); //zapnutie chybových hlásení
+error_reporting(E_ALL); 
 ini_set("display_errors","Off");
 define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/classes/Database.php');
@@ -46,9 +46,9 @@ class QnA extends Database {
         $sql = "SELECT * FROM qna";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
-        // Získanie dát
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         $admin = new Users();
+        //Kontrola administrátora
         if ($admin->isAdmin()) {
             // Zobrazenie tlačidiel na editáciu a vymazanie
             foreach ($data as $row) {
@@ -97,11 +97,11 @@ class QnA extends Database {
     }
     public function insertQnA(){
         try {
-          // Načítanie JSON súboru
+            // Načítanie JSON súboru
             $data = json_decode(file_get_contents
             (__ROOT__.'/data/datas.json'), true);
             $otazky = $data["otazky"];
-             $odpovede = $data["odpovede"];
+            $odpovede = $data["odpovede"];
              // Vloženie otázok a odpovedí v rámci transakcie
             $this->connection->beginTransaction();
             $sqlCheck = "SELECT COUNT(*) AS count FROM qna WHERE otazka = :otazka AND odpoved = :odpoved";
@@ -130,8 +130,6 @@ class QnA extends Database {
                 echo "Chyba pri vkladaní dát do databázy: " . $e->getMessage();
                 $this->connection->rollback(); 
                 // Vrátenie späť zmien v prípade chyby
-              } finally {
-            
-        }
+              } finally {}
     }
 }
