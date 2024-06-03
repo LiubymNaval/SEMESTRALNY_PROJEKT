@@ -1,6 +1,9 @@
 <?php
 include_once "nav.php";
-$menu = getMenuData("header");
+use navig\Nav;
+$nav = new Nav();
+
+$menu = $nav->getMenuData("header");
 ?>
 <header class="container main-header">
 <div>
@@ -10,11 +13,12 @@ $menu = getMenuData("header");
 </div>
 <nav class="main-nav">
 <ul class="main-menu" id="main-menu">
-<?php printMenu($menu); ?>
-<?php printLoginRegister()?>
+<?php $nav->printMenu($menu); ?> 
+<?php $nav->printLoginRegister(); ?> 
 </ul>
 <a class="hamburger" id="hamburger">
 <i class="fa fa-bars" style="color:greenyellow"></i>
 </a>
 </nav>
 </header>
+

@@ -1,10 +1,16 @@
 <?php 
+namespace navig;
+class Nav{
+
+
+//Overenie, či zadaný typ menu je platný typ
 function validateMenuType(string $type): bool
 {
     $menuTypes = [
         'header',
         'footer'
     ];
+    //či sa zadaný typ nachádza v zozname povolených typov
     if (in_array($type, $menuTypes)) {
         return true;
     } else {
@@ -14,8 +20,11 @@ function validateMenuType(string $type): bool
 
 function getMenuData(string $type): array
 {
+
+    $nav = new Nav(); 
     $menu = [];
-    if (validateMenuType($type)) {
+    //funkcia skontroluje, či je zadaný typ platný
+    if ($nav->validateMenuType($type)) {
         if ($type === "header") {
             $menu = [
                 'home' => [
@@ -57,5 +66,6 @@ function printLoginRegister(): void{
     } else {
         echo '<li> <a href="profil.php">Prihlásiť/Registrovať</a> </li>';
     }
+}
 }
 ?>

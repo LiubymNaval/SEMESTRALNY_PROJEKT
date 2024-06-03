@@ -138,6 +138,7 @@ class Users extends Database{
                 echo "admin je tu";
                 return true;
             }else{
+                return false;
             }
         }else{
             return false;
@@ -149,6 +150,7 @@ class Users extends Database{
             if($_SESSION['rola'] == 'pouzivatel'){
                 return true;
             }else{
+                return false;
             }
         }else{
             return false;
